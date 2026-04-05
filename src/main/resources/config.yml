@@ -31,6 +31,9 @@ grave:
   explosion-protection: true
   # If true, graves cannot be broken by players unless they have the 'gravebox.bypass' permission.
   indestructible: true
+  # If true, any player can open any grave. If false, only the owner can open it.
+  # (Bypass permission 'gravebox.bypass' still works regardless of this setting)
+  allow-others-to-open: false
 
   # Behavior settings
   # ---

@@ -56,6 +56,7 @@ public final class GraveBox extends JavaPlugin implements Listener {
     private boolean indestructible;
     private boolean autoRemove;
     private boolean dropItemsOnDestroy;
+    private boolean allowOthersToOpen;
 
     @Override
     public void onEnable() {
@@ -98,6 +99,7 @@ public final class GraveBox extends JavaPlugin implements Listener {
         indestructible = getConfig().getBoolean("grave.indestructible", true);
         autoRemove = getConfig().getBoolean("grave.auto-remove", true);
         dropItemsOnDestroy = getConfig().getBoolean("grave.drop-items-on-destroy", false);
+        allowOthersToOpen = getConfig().getBoolean("grave.allow-others-to-open", false);
     }
 
     private void loadGravesFromFiles() {
@@ -183,7 +185,7 @@ public final class GraveBox extends JavaPlugin implements Listener {
         event.setCancelled(true);
         Player player = event.getPlayer();
 
-        if (!grave.getOwnerId().equals(player.getUniqueId()) && !player.hasPermission("gravebox.bypass")) {
+        if (!allowOthersToOpen && !grave.getOwnerId().equals(player.getUniqueId()) && !player.hasPermission("gravebox.bypass")) {
             player.sendMessage(tl("messages.not-your-grave"));
             return;
         }
